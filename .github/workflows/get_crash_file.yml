@@ -17,4 +17,9 @@ jobs:
           ./segfault
       - name: list files
         run: |
-          ls ${{ github.workspace }}
+          ls test-GHA
+      - name: upload core file
+        uses: actions/upload-artifact@v2
+        with:
+          name: core_artifact
+          path: core
