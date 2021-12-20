@@ -15,11 +15,11 @@ jobs:
           g++ test_segfault.cpp -o segfault
           ulimit -c unlimited
           ./segfault
+          chmod -R +r /cores/*
       - name: list files
-        run: |
-          ls test-GHA
+        run: ls test-GHA
       - name: upload core file
         uses: actions/upload-artifact@v2
         with:
-          name: core_artifact
-          path: core
+          name: crash
+          path: /cores
