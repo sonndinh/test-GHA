@@ -24,8 +24,10 @@ jobs:
           ls
           chmod -R +r /cores/*
       - name: list files
+        if: always()
         run: ls test-GHA
       - name: upload core file
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: crash
