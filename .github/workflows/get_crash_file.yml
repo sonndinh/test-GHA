@@ -4,6 +4,10 @@ jobs:
   Example:
     runs-on: ubuntu-18.04
     steps:
+      - name: checkout test-GHA
+        uses: actions/checkout@v2
+        with:
+          path: test-GHA
       - name: build and run
         shell: bash
         run: |
