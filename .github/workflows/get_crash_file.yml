@@ -1,0 +1,15 @@
+name: Get Core File
+on: [pull request]
+jobs:
+  Example:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: build and run
+        shell: bash
+        run: |
+          g++ test_segfault.cpp -o segfault
+          ulimit -c unlimited
+          ./segfault
+      - name: list files
+        run: |
+          ls ${{ github.workspace }}
