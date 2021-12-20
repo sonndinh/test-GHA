@@ -3,6 +3,7 @@ on: [pull_request]
 jobs:
   Example:
     runs-on: ubuntu-18.04
+    continue-on-error: true
     steps:
       - name: checkout test-GHA
         uses: actions/checkout@v2
