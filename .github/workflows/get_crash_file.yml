@@ -15,11 +15,12 @@ jobs:
           cd test-GHA
           g++ test_segfault.cpp -o segfault
           ulimit -c unlimited
+          ulimit -c
           echo "Current directory:"
           pwd
           echo "Before running"
           ls
-          sudo ./segfault
+          sh -c "./segfault"
           echo "After running"
           ls
       - name: list files
@@ -29,10 +30,6 @@ jobs:
           ls test-GHA
           echo "ls .."
           ls ..
-          echo "ls /"
-          ls /
-          echo "ls /cores"
-          ls /cores
       - name: upload core file
         if: always()
         uses: actions/upload-artifact@v2
