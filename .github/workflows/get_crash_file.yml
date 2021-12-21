@@ -1,15 +1,44 @@
 name: Get Core File
-on: [pull request]
+on: [pull_request]
 jobs:
   Example:
     runs-on: ubuntu-18.04
+    continue-on-error: true
     steps:
+      - name: checkout test-GHA
+        uses: actions/checkout@v2
+        with:
+          path: test-GHA
       - name: build and run
         shell: bash
         run: |
+          cd test-GHA
           g++ test_segfault.cpp -o segfault
           ulimit -c unlimited
-          ./segfault
+          ulimit -c
+          echo "Current directory:"
+          pwd
+          echo "Before running"
+          ls
+          sh -c "./segfault"
+          echo "After running"
+          ls
       - name: list files
+        if: always()
         run: |
-          ls ${{ github.workspace }}
+          echo "find core in /var"
+          sudo find /var -name "core"
+          echo "find core in /"
+          sudo find / -name "core"
+          echo "ls test-GHA"
+          ls test-GHA
+          echo "ls /var"
+          ls /var
+          echo "ls /var/crash"
+          ls /var/crash
+      - name: upload core file
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: crash
+          path: .
