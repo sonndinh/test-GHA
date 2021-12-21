@@ -28,8 +28,10 @@ jobs:
         run: |
           echo "ls test-GHA"
           ls test-GHA
-          echo "ls .."
-          ls ..
+          echo "ls /var"
+          ls /var
+          echo "ls /var/crash"
+          ls /var/crash
       - name: upload core file
         if: always()
         uses: actions/upload-artifact@v2
