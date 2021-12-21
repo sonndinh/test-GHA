@@ -26,6 +26,8 @@ jobs:
       - name: list files
         if: always()
         run: |
+          echo "find core"
+          find /var -name "core"
           echo "ls test-GHA"
           ls test-GHA
           echo "ls /var"
